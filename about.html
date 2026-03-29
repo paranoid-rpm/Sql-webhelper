@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL WebHelper — Архитектура</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar glass">
+      <div class="brand">SQL WebHelper</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="theory.html">Теория</a>
+        <a href="admin.html">DBM Studio</a>
+        <a href="about.html" class="active">Архитектура</a>
+      </nav>
+    </header>
+
+    <main class="content-page">
+      <section class="glass gradient-border content">
+        <h1>Архитектурная концепция</h1>
+        <p>
+          SQL WebHelper спроектирован как модульное веб-приложение, которое
+          соединяет образовательный контент и рабочую панель администратора БД.
+        </p>
+
+        <h2>Слои приложения</h2>
+        <ol>
+          <li><strong>UI Layer:</strong> многостраничный интерфейс с единым дизайн-языком.</li>
+          <li><strong>Domain Layer:</strong> mini SQL-движок для CRUD-операций.</li>
+          <li><strong>Data Layer:</strong> in-memory модель таблиц как прототип реальной БД.</li>
+        </ol>
+
+        <h2>План расширения до production</h2>
+        <ul>
+          <li>Добавление backend API (Node.js/Python/Go) с настоящим MySQL.</li>
+          <li>JWT/OAuth2 авторизация и разграничение ролей DBA/Analyst/Viewer.</li>
+          <li>Миграции схемы через Liquibase/Flyway.</li>
+          <li>Набор шаблонов административных операций и отчётов.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>© 2026 SQL WebHelper • Architecture</footer>
+  </body>
+</html>

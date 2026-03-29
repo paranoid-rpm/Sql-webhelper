@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL WebHelper — DBM Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar glass">
+      <div class="brand">SQL WebHelper</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="theory.html">Теория</a>
+        <a href="admin.html" class="active">DBM Studio</a>
+        <a href="about.html">Архитектура</a>
+      </nav>
+    </header>
+
+    <main class="admin-layout">
+      <aside class="sidebar glass">
+        <h2>Схемы</h2>
+        <div class="schema-card">
+          <p class="schema-title">demo_shop</p>
+          <ul>
+            <li data-table="users" class="table-item active">users</li>
+            <li data-table="orders" class="table-item">orders</li>
+            <li data-table="products" class="table-item">products</li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <div class="panel glass">
+          <h2>Таблица: <span id="table-name">users</span></h2>
+          <div id="table-output" class="table-wrap"></div>
+        </div>
+
+        <div class="panel glass">
+          <h2>SQL Console</h2>
+          <p class="hint">
+            Поддержка mini-DBM: SELECT * FROM table; INSERT INTO table (a,b)
+            VALUES (1,'x'); UPDATE table SET a=2 WHERE id=1; DELETE FROM table
+            WHERE id=1;
+          </p>
+          <textarea id="sql-input" rows="5">SELECT * FROM users;</textarea>
+          <div class="row">
+            <button id="run-sql" class="btn btn-primary">Выполнить</button>
+            <button id="reset-db" class="btn btn-secondary">Сбросить демо-БД</button>
+          </div>
+          <pre id="sql-log" class="log"></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 SQL WebHelper • DBM Studio</footer>
+    <script src="app.js"></script>
+  </body>
+</html>
