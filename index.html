@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <canvas id="fx-canvas" aria-hidden="true"></canvas>
     <div class="bg-orb orb-a"></div>
     <div class="bg-orb orb-b"></div>
 
@@ -38,16 +39,16 @@
 
       <section class="stats-grid reveal delay-1">
         <article class="stat-card glass">
-          <p class="stat-number">6+</p>
+          <p class="stat-number">8+</p>
           <p class="stat-label">крупных теоретических доменов</p>
         </article>
         <article class="stat-card glass">
-          <p class="stat-number">4</p>
-          <p class="stat-label">ключевых SQL-операции в симуляторе</p>
+          <p class="stat-number">10</p>
+          <p class="stat-label">интерактивных модулей для DBA-команды</p>
         </article>
         <article class="stat-card glass">
-          <p class="stat-number">1</p>
-          <p class="stat-label">единый дизайн-язык для всех экранов</p>
+          <p class="stat-number">24/7</p>
+          <p class="stat-label">поддержка процессов эксплуатации</p>
         </article>
       </section>
 
@@ -67,15 +68,52 @@
           </p>
         </article>
         <article class="info-card glass">
-          <h3>Практические плейбуки</h3>
+          <h3>Клиентская прозрачность</h3>
           <p>
-            Готовые сценарии инцидентов и чеклисты: деградация запросов, deadlock,
-            рост latency, аварийное восстановление и контроль доступа.
+            SLA-панели, runbooks, отчётность для бизнеса и понятные KPI по latency,
+            error rate, надёжности, стоимости владения и доступности сервиса.
           </p>
         </article>
       </section>
 
-      <section class="timeline glass reveal delay-3">
+      <section class="table-section glass reveal delay-3">
+        <h2>Матрица ценности для клиентов</h2>
+        <div class="table-wrap">
+          <table class="db-table db-table-compare">
+            <thead>
+              <tr>
+                <th>Критерий</th>
+                <th>Базовый подход</th>
+                <th>SQL WebHelper</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Время диагностики инцидента</td>
+                <td>30–90 минут</td>
+                <td><strong>5–15 минут</strong> с playbooks и SQL-log</td>
+              </tr>
+              <tr>
+                <td>Подготовка junior DBA</td>
+                <td>Только документация</td>
+                <td><strong>Интерактивный sandbox + теория</strong></td>
+              </tr>
+              <tr>
+                <td>Прозрачность для бизнеса</td>
+                <td>Разрозненные отчёты</td>
+                <td><strong>Единый dashboard-подход</strong></td>
+              </tr>
+              <tr>
+                <td>Управление рисками</td>
+                <td>Ручные сценарии</td>
+                <td><strong>Стандартизированные runbooks</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="timeline glass reveal delay-4">
         <h2>Путь администратора данных</h2>
         <div class="timeline-grid">
           <div>

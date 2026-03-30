@@ -1,57 +1,138 @@
 const seedDb = () => ({
   users: [
-    { id: 1, name: "Анна", role: "DBA" },
-    { id: 2, name: "Игорь", role: "Analyst" },
-    { id: 3, name: "Мария", role: "Developer" }
+    { id: 1, name: "Анна", role: "DBA", region: "EU" },
+    { id: 2, name: "Игорь", role: "Analyst", region: "US" },
+    { id: 3, name: "Мария", role: "Developer", region: "APAC" }
   ],
   orders: [
-    { id: 101, user_id: 1, total: 1200 },
-    { id: 102, user_id: 2, total: 450 },
-    { id: 103, user_id: 3, total: 700 }
+    { id: 101, user_id: 1, total: 1200, status: "done" },
+    { id: 102, user_id: 2, total: 450, status: "pending" },
+    { id: 103, user_id: 3, total: 700, status: "done" }
   ],
   products: [
-    { id: 501, name: "SSD", price: 9800 },
-    { id: 502, name: "CPU", price: 21000 },
-    { id: 503, name: "RAM", price: 7400 }
+    { id: 501, name: "SSD", price: 9800, stock: 16 },
+    { id: 502, name: "CPU", price: 21000, stock: 8 },
+    { id: 503, name: "RAM", price: 7400, stock: 34 }
   ]
 });
 
 let db = seedDb();
 let currentTable = "users";
+let currentFilter = "";
+let sortState = { column: null, direction: "asc" };
 const history = [];
 
 const tableNameEl = document.getElementById("table-name");
+const tableMetaEl = document.getElementById("table-meta");
 const tableOutputEl = document.getElementById("table-output");
 const sqlInputEl = document.getElementById("sql-input");
 const sqlLogEl = document.getElementById("sql-log");
 const historyListEl = document.getElementById("history-list");
+const filterInputEl = document.getElementById("table-filter");
+const kpiRowsEl = document.getElementById("kpi-rows");
+const kpiColumnsEl = document.getElementById("kpi-columns");
+const kpiHistoryEl = document.getElementById("kpi-history");
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function updateKpi(rows) {
+  if (!kpiRowsEl || !kpiColumnsEl || !kpiHistoryEl) return;
+  const firstRow = rows[0] || {};
+  kpiRowsEl.textContent = String(rows.length);
+  kpiColumnsEl.textContent = String(Object.keys(firstRow).length || 0);
+  kpiHistoryEl.textContent = String(history.length);
+}
 
 function renderHistory() {
   if (!historyListEl) return;
   historyListEl.innerHTML = history
     .slice(-10)
     .reverse()
-    .map((item) => `<li>${item}</li>`)
+    .map((item) => `<li>${escapeHtml(item)}</li>`)
     .join("");
+  updateKpi(getProcessedRows(currentTable));
+}
+
+function getProcessedRows(table) {
+  const rows = [...(db[table] || [])];
+  let filtered = rows;
+
+  if (currentFilter) {
+    const needle = currentFilter.toLowerCase();
+    filtered = rows.filter((row) =>
+      Object.values(row).some((value) => String(value).toLowerCase().includes(needle))
+    );
+  }
+
+  if (sortState.column) {
+    filtered.sort((a, b) => {
+      const av = a[sortState.column];
+      const bv = b[sortState.column];
+      if (av === bv) return 0;
+      const direction = sortState.direction === "asc" ? 1 : -1;
+      return av > bv ? direction : -direction;
+    });
+  }
+
+  return filtered;
+}
+
+function getSortIndicator(column) {
+  if (sortState.column !== column) return "↕";
+  return sortState.direction === "asc" ? "↑" : "↓";
 }
 
 function renderTable(table) {
   currentTable = table;
   tableNameEl.textContent = table;
-  const rows = db[table] || [];
 
-  if (!rows.length) {
+  const baseRows = db[table] || [];
+  const rows = getProcessedRows(table);
+
+  if (!baseRows.length) {
     tableOutputEl.innerHTML = "<p>Таблица пуста.</p>";
+    tableMetaEl.textContent = "0 строк";
+    updateKpi(rows);
     return;
   }
 
-  const headers = Object.keys(rows[0]);
-  const headHtml = headers.map((h) => `<th>${h}</th>`).join("");
-  const bodyHtml = rows
-    .map((row) => `<tr>${headers.map((h) => `<td>${row[h]}</td>`).join("")}</tr>`)
+  const headers = Object.keys(baseRows[0]);
+  const headHtml = headers
+    .map(
+      (h) =>
+        `<th><button class="sort-btn" data-column="${escapeHtml(h)}">${escapeHtml(h)} <span>${getSortIndicator(h)}</span></button></th>`
+    )
     .join("");
 
-  tableOutputEl.innerHTML = `<table class="db-table"><thead><tr>${headHtml}</tr></thead><tbody>${bodyHtml}</tbody></table>`;
+  const bodyHtml = rows
+    .map(
+      (row) =>
+        `<tr>${headers.map((h) => `<td>${escapeHtml(row[h])}</td>`).join("")}</tr>`
+    )
+    .join("");
+
+  tableOutputEl.innerHTML = `<table class="db-table"><thead><tr>${headHtml}</tr></thead><tbody>${bodyHtml || '<tr><td colspan="100%">Ничего не найдено по фильтру.</td></tr>'}</tbody></table>`;
+  tableMetaEl.textContent = `${rows.length} из ${baseRows.length} строк`;
+  updateKpi(rows);
+
+  tableOutputEl.querySelectorAll(".sort-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const column = button.dataset.column;
+      if (sortState.column === column) {
+        sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
+      } else {
+        sortState = { column, direction: "asc" };
+      }
+      renderTable(currentTable);
+    });
+  });
 }
 
 function parseValue(v) {
@@ -135,6 +216,9 @@ document.querySelectorAll(".table-item").forEach((item) => {
   item.addEventListener("click", () => {
     document.querySelectorAll(".table-item").forEach((n) => n.classList.remove("active"));
     item.classList.add("active");
+    sortState = { column: null, direction: "asc" };
+    currentFilter = "";
+    if (filterInputEl) filterInputEl.value = "";
     renderTable(item.dataset.table);
   });
 });
@@ -148,6 +232,9 @@ document.getElementById("run-sql").addEventListener("click", () => {
 
 document.getElementById("reset-db").addEventListener("click", () => {
   db = seedDb();
+  sortState = { column: null, direction: "asc" };
+  currentFilter = "";
+  if (filterInputEl) filterInputEl.value = "";
   renderTable(currentTable);
   const result = "OK: демо-БД сброшена к начальному состоянию.";
   sqlLogEl.textContent = result;
@@ -166,6 +253,19 @@ document.getElementById("copy-log").addEventListener("click", async () => {
     sqlLogEl.textContent = result;
     logAndStore("COPY LOG", result);
   }
+});
+
+if (filterInputEl) {
+  filterInputEl.addEventListener("input", () => {
+    currentFilter = filterInputEl.value.trim();
+    renderTable(currentTable);
+  });
+}
+
+document.getElementById("clear-filter")?.addEventListener("click", () => {
+  currentFilter = "";
+  if (filterInputEl) filterInputEl.value = "";
+  renderTable(currentTable);
 });
 
 renderTable(currentTable);
