@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL WebHelper — Архитектура</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="topbar glass reveal">
+      <div class="brand">SQL WebHelper</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="theory.html">Теория</a>
+        <a href="admin.html">DBM Studio</a>
+        <a href="playbooks.html">Playbooks</a>
+        <a href="about.html" class="active">Архитектура</a>
+      </nav>
+    </header>
+
+    <main class="content-page">
+      <section class="glass gradient-border content reveal">
+        <h1>Архитектурная стратегия SQL WebHelper</h1>
+        <p class="lead">
+          Платформа проектируется как обучающе-операционная среда, где интерфейс
+          администратора данных и инженерная теория дополняют друг друга.
+        </p>
+
+        <h2>Слои системы</h2>
+        <ol>
+          <li><strong>Experience Layer:</strong> минималистичный UI с анимациями и фокусом на читаемость.</li>
+          <li><strong>Domain Layer:</strong> SQL parser-lite и CRUD-движок для тренировки DBA-мышления.</li>
+          <li><strong>Data Layer:</strong> in-memory таблицы как безопасный sandbox.</li>
+          <li><strong>Future API Layer:</strong> подключение реального MySQL/PostgreSQL backend.</li>
+        </ol>
+
+        <h2>Дорожная карта</h2>
+        <ul>
+          <li>SQL форматирование и подсветка синтаксиса.</li>
+          <li>Ролевая модель доступа и аудит действий.</li>
+          <li>Импорт/экспорт CSV и migration scripts.</li>
+          <li>Dashboard метрик: latency, locks, replication lag.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>© 2026 SQL WebHelper • Architecture</footer>
+    <script src="ui.js"></script>
+  </body>
+</html>

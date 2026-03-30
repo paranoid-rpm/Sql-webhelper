@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL WebHelper — DBA Playbooks</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="topbar glass reveal">
+      <div class="brand">SQL WebHelper</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="theory.html">Теория</a>
+        <a href="admin.html">DBM Studio</a>
+        <a href="playbooks.html" class="active">Playbooks</a>
+        <a href="about.html">Архитектура</a>
+      </nav>
+    </header>
+
+    <main class="content-page">
+      <section class="glass content reveal">
+        <h1>Практические DBA Playbooks</h1>
+        <p class="lead">Готовые регламенты для реальных эксплуатационных сценариев.</p>
+
+        <div class="playbook-grid">
+          <article class="playbook-card">
+            <h3>Slow Query Spike</h3>
+            <ol>
+              <li>Проверить p95/p99 latency и рост очередей.</li>
+              <li>Снять top SQL из slow log / performance schema.</li>
+              <li>Сравнить execution plans до/после деградации.</li>
+              <li>Проверить stale statistics и индексное покрытие.</li>
+              <li>Выполнить безопасный rollout оптимизации.</li>
+            </ol>
+          </article>
+
+          <article class="playbook-card">
+            <h3>Deadlock Incident</h3>
+            <ol>
+              <li>Собрать deadlock traces и affected transactions.</li>
+              <li>Выявить конфликтующие таблицы/порядок блокировок.</li>
+              <li>Уменьшить размер транзакций и ввести retry-jitter.</li>
+              <li>Проверить уровень изоляции и бизнес-инварианты.</li>
+              <li>Подготовить postmortem с preventive actions.</li>
+            </ol>
+          </article>
+
+          <article class="playbook-card">
+            <h3>Replica Lag Growth</h3>
+            <ol>
+              <li>Оценить природу нагрузки (burst vs sustained).</li>
+              <li>Проверить IO/CPU saturation на репликах.</li>
+              <li>Приоритизировать critical writes и batch windows.</li>
+              <li>Запустить controlled re-sync при необходимости.</li>
+              <li>Пересчитать capacity и scaling policy.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 SQL WebHelper • Operational Playbooks</footer>
+    <script src="ui.js"></script>
+  </body>
+</html>

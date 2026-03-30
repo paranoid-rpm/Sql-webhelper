@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL WebHelper — DBM Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="topbar glass reveal">
+      <div class="brand">SQL WebHelper</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="theory.html">Теория</a>
+        <a href="admin.html" class="active">DBM Studio</a>
+        <a href="playbooks.html">Playbooks</a>
+        <a href="about.html">Архитектура</a>
+      </nav>
+    </header>
+
+    <main class="admin-layout">
+      <aside class="sidebar glass reveal">
+        <h2>Схемы</h2>
+        <div class="schema-card">
+          <p class="schema-title">demo_shop</p>
+          <ul>
+            <li data-table="users" class="table-item active">users</li>
+            <li data-table="orders" class="table-item">orders</li>
+            <li data-table="products" class="table-item">products</li>
+          </ul>
+        </div>
+        <div class="kpi-box">
+          <p><strong>Таблиц:</strong> 3</p>
+          <p><strong>Режим:</strong> mini-DBM sandbox</p>
+          <p><strong>Лог:</strong> в реальном времени</p>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <div class="panel glass reveal delay-1">
+          <h2>Таблица: <span id="table-name">users</span></h2>
+          <div id="table-output" class="table-wrap"></div>
+        </div>
+
+        <div class="panel glass reveal delay-2">
+          <h2>SQL Console</h2>
+          <p class="hint">Поддержка mini-DBM:</p>
+          <ul class="hint-list">
+            <li>SELECT * FROM table;</li>
+            <li>INSERT INTO table (a,b) VALUES (1,'x');</li>
+            <li>UPDATE table SET a=2 WHERE id=1;</li>
+            <li>DELETE FROM table WHERE id=1;</li>
+          </ul>
+          <textarea id="sql-input" rows="5">SELECT * FROM users;</textarea>
+          <div class="row">
+            <button id="run-sql" class="btn btn-primary">Выполнить</button>
+            <button id="reset-db" class="btn btn-secondary">Сбросить демо-БД</button>
+            <button id="copy-log" class="btn btn-ghost">Копировать лог</button>
+          </div>
+          <pre id="sql-log" class="log">Готово к выполнению SQL.</pre>
+          <div class="history-wrap">
+            <h3>История запросов</h3>
+            <ul id="history-list" class="history-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 SQL WebHelper • DBM Studio</footer>
+    <script src="app.js"></script>
+    <script src="ui.js"></script>
+  </body>
+</html>

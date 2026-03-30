@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL WebHelper — Теория DBA</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="topbar glass reveal">
+      <div class="brand">SQL WebHelper</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="theory.html" class="active">Теория</a>
+        <a href="admin.html">DBM Studio</a>
+        <a href="playbooks.html">Playbooks</a>
+        <a href="about.html">Архитектура</a>
+      </nav>
+    </header>
+
+    <main class="content-page">
+      <section class="glass gradient-border content reveal">
+        <h1>Полный теоретический фундамент по администрированию БД</h1>
+        <p class="lead">
+          Этот раздел специально сделан максимально насыщенным: он покрывает полный
+          цикл жизни базы данных — от проектирования до эксплуатации в критичных
+          production-системах.
+        </p>
+
+        <h2>1) Проектирование схемы данных</h2>
+        <p>Цель проектирования — минимизировать избыточность, обеспечить целостность и оптимизировать будущие запросы.</p>
+        <ul>
+          <li>Сбор доменной модели: сущности, атрибуты, ограничения, бизнес-правила.</li>
+          <li>Выбор ключей: surrogate vs natural key, составные ключи.</li>
+          <li>Нормальные формы: 1NF, 2NF, 3NF, BCNF, компромиссы денормализации.</li>
+          <li>ER-диаграммы, версионирование схемы, миграционная дисциплина.</li>
+        </ul>
+
+        <h2>2) Индексы и физическая организация</h2>
+        <p>
+          Индекс должен соответствовать реальному паттерну запросов. Избыточные индексы
+          ускоряют SELECT, но ухудшают INSERT/UPDATE/DELETE.
+        </p>
+        <ul>
+          <li>B-Tree для диапазонов и сортировок.</li>
+          <li>Hash для точных сравнений.</li>
+          <li>Composite index и правило left-most prefix.</li>
+          <li>Covering index для исключения лишних чтений таблицы.</li>
+          <li>Переоценка индексов по slow query log и telemetry.</li>
+        </ul>
+
+        <h2>3) SQL-оптимизация и план выполнения</h2>
+        <p>
+          Оптимизатор строит execution plan на основе статистик и кардинальности.
+          Администратор должен уметь читать explain-планы и диагностировать узкие места.
+        </p>
+        <ul>
+          <li>Выявление full table scan и лишних nested loop.</li>
+          <li>Раннее фильтрование и pushdown predicate.</li>
+          <li>Контроль селективности условий в WHERE/JOIN.</li>
+          <li>Понимание стоимости операций sort, temp table, filesort.</li>
+        </ul>
+
+        <h2>4) Транзакции, блокировки, конкуренция</h2>
+        <p>
+          В конкурентных системах важно управлять lock contention, phantom reads,
+          deadlock-ситуациями и временем удержания блокировок.
+        </p>
+        <ul>
+          <li>ACID как базовый контракт надёжности.</li>
+          <li>Уровни изоляции и их эффект на throughput.</li>
+          <li>Стратегии retry/backoff при deadlock.</li>
+          <li>Короткие транзакции и правильный порядок доступа к ресурсам.</li>
+        </ul>
+
+        <h2>5) Репликация и высокая доступность</h2>
+        <ul>
+          <li>Topologies: primary-replica, multi-primary, geo-replication.</li>
+          <li>RPO/RTO и выбор стратегии восстановления.</li>
+          <li>Failover-процедуры, контроль lag и согласованности.</li>
+          <li>Проверка резервных копий через регулярные restore-drills.</li>
+        </ul>
+
+        <h2>6) Безопасность, комплаенс и аудит</h2>
+        <ul>
+          <li>Principle of Least Privilege и role-based access.</li>
+          <li>Шифрование in-transit (TLS) и at-rest (TDE/диски).</li>
+          <li>Секреты и ротация ключей, секрет-менеджеры.</li>
+          <li>Полный аудит критичных операций и доступов.</li>
+          <li>Защита от SQL-инъекций (параметризация + валидация).</li>
+        </ul>
+
+        <h2>7) Observability и SRE-практики</h2>
+        <p>
+          Современный DBA работает на метриках: latency p95/p99, saturation,
+          lock waits, replication lag, cache hit ratio, error rate.
+        </p>
+        <ul>
+          <li>Настройка алертов по симптомам и бизнес-влиянию.</li>
+          <li>SLO для read/write сценариев.</li>
+          <li>Capacity planning, прогнозирование роста данных.</li>
+          <li>Postmortem-культура и непрерывное улучшение процессов.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>© 2026 SQL WebHelper • DBA Knowledge Core</footer>
+    <script src="ui.js"></script>
+  </body>
+</html>
