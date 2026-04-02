@@ -5,50 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SQL WebHelper — DBM Studio</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="site.js" defer></script>
   </head>
   <body>
-    <header class="topbar glass">
+    <header class="topbar">
       <div class="brand">SQL WebHelper</div>
       <nav>
         <a href="index.html">Главная</a>
         <a href="theory.html">Теория</a>
         <a href="admin.html" class="active">DBM Studio</a>
         <a href="about.html">Архитектура</a>
+        <a href="docs.html">SQL Docs</a>
+        <a href="release-notes.html">Релизы</a>
+        <a href="contacts.html">Контакты</a>
       </nav>
     </header>
 
     <main class="admin-layout">
-      <aside class="sidebar glass">
-        <h2>Схемы</h2>
+      <aside class="sidebar">
+        <h2>Навигатор схем</h2>
+        <p class="hint">Контур: демонстрационная БД `demo_shop`</p>
         <div class="schema-card">
-          <p class="schema-title">demo_shop</p>
-          <ul>
-            <li data-table="users" class="table-item active">users</li>
-            <li data-table="orders" class="table-item">orders</li>
-            <li data-table="products" class="table-item">products</li>
-          </ul>
+          <p class="schema-title">Таблицы</p>
+          <ul id="table-list"></ul>
         </div>
       </aside>
 
       <section class="workspace">
-        <div class="panel glass">
-          <h2>Таблица: <span id="table-name">users</span></h2>
+        <div class="panel">
+          <h2>Просмотр таблицы: <span id="table-name">users</span></h2>
+          <p class="hint">
+            Отображение актуальных данных выбранной таблицы. Используйте SQL-консоль ниже для
+            изменения содержимого.
+          </p>
           <div id="table-output" class="table-wrap"></div>
         </div>
 
-        <div class="panel glass">
+        <div class="panel">
           <h2>SQL Console</h2>
           <p class="hint">
-            Поддержка mini-DBM: SELECT * FROM table; INSERT INTO table (a,b)
-            VALUES (1,'x'); UPDATE table SET a=2 WHERE id=1; DELETE FROM table
-            WHERE id=1;
+            Поддержка команд: `SELECT ... FROM ... WHERE ... ORDER BY ... LIMIT ...`,
+            `INSERT INTO ... VALUES (...)`, `UPDATE ... SET ... WHERE ...`, `DELETE FROM ... WHERE ...`,
+            `CREATE TABLE`, `ALTER TABLE ADD/DROP COLUMN`, `DROP TABLE`, `TRUNCATE TABLE`,
+            `SHOW TABLES`, `DESCRIBE table`, `EXPLAIN SELECT ...`,
+            `JOIN`, `GROUP BY`, `HAVING`, `COUNT/SUM/AVG/MIN/MAX`.
           </p>
           <textarea id="sql-input" rows="5">SELECT * FROM users;</textarea>
           <div class="row">
-            <button id="run-sql" class="btn btn-primary">Выполнить</button>
-            <button id="reset-db" class="btn btn-secondary">Сбросить демо-БД</button>
+            <button id="run-sql" class="btn btn-primary">Выполнить запрос</button>
+            <button id="run-explain" class="btn btn-primary">EXPLAIN</button>
+            <button id="reset-db" class="btn btn-secondary">Сбросить демо-данные</button>
+            <button id="export-db" class="btn btn-secondary">Экспорт JSON</button>
+            <label class="btn btn-secondary file-btn">
+              Импорт JSON
+              <input id="import-db" type="file" accept=".json,application/json" />
+            </label>
           </div>
           <pre id="sql-log" class="log"></pre>
+        </div>
+
+        <div class="panel">
+          <h2>План выполнения</h2>
+          <p class="hint">
+            Блок отображает визуальный план по `EXPLAIN` и помогает оценить сканирование таблиц,
+            фильтрацию, JOIN-операции, группировку и сортировку.
+          </p>
+          <div id="explain-output" class="explain-box">
+            <p class="hint">Пока нет плана. Нажмите кнопку EXPLAIN.</p>
+          </div>
         </div>
       </section>
     </main>

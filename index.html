@@ -3,60 +3,177 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SQL WebHelper — Портал администратора БД</title>
+    <title>SQL WebHelper — Центр управления данными</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="site.js" defer></script>
   </head>
   <body>
-    <header class="topbar glass">
+    <header class="topbar">
       <div class="brand">SQL WebHelper</div>
       <nav>
         <a href="index.html" class="active">Главная</a>
         <a href="theory.html">Теория</a>
         <a href="admin.html">DBM Studio</a>
         <a href="about.html">Архитектура</a>
+        <a href="docs.html">SQL Docs</a>
+        <a href="release-notes.html">Релизы</a>
+        <a href="contacts.html">Контакты</a>
       </nav>
     </header>
 
     <main class="hero-page">
-      <section class="hero glass gradient-border">
-        <p class="eyebrow">Веб-приложение для администрирования баз данных</p>
-        <h1>Современная SQL-платформа в стиле <span>MySQL DBM</span></h1>
+      <section class="hero">
+        <p class="eyebrow">Платформа администрирования баз данных</p>
+        <h1>Надежный SQL-интерфейс для <span>операционной работы и обучения</span></h1>
         <p>
-          Многостраничный портал объединяет учебную базу знаний и интерактивный
-          интерфейс управления таблицами, запросами и схемами. Интерфейс
-          построен с акцентом на UX, визуальную иерархию и скорость работы.
+          SQL WebHelper объединяет рабочее пространство администратора, справочную теорию и
+          инструменты анализа. Интерфейс подходит для инженерных команд, учебных лабораторий и
+          демонстрационных стендов, где важны прозрачность операций, контроль изменений и единый
+          стандарт управления данными.
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="admin.html">Открыть DBM Studio</a>
-          <a class="btn btn-secondary" href="theory.html">Изучить теорию</a>
+          <a class="btn btn-secondary" href="theory.html">Перейти к теории</a>
         </div>
       </section>
 
-      <section class="cards-grid">
-        <article class="info-card glass">
-          <h3>Управление схемами</h3>
-          <p>
-            Создание, просмотр и редактирование таблиц, контроль связей и быстрая
-            навигация по структуре базы.
-          </p>
-        </article>
-        <article class="info-card glass">
-          <h3>SQL-консоль</h3>
-          <p>
-            Выполнение запросов SELECT/INSERT/UPDATE/DELETE в стиле mini-DBM с
-            выводом результата в табличном виде.
-          </p>
-        </article>
-        <article class="info-card glass">
-          <h3>Образовательная база</h3>
-          <p>
-            Большой теоретический блок: нормализация, индексы, транзакции,
-            репликация и безопасность данных.
-          </p>
-        </article>
+      <section class="section">
+        <h2>Ключевые показатели</h2>
+        <p class="section-intro">
+          Платформа ориентирована на предсказуемую эксплуатацию и быстрое внедрение процессов в
+          командах разработки и сопровождения.
+        </p>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <strong>99.95%</strong>
+            <span>Целевой уровень доступности сервисов данных</span>
+          </div>
+          <div class="kpi">
+            <strong>&lt; 150 мс</strong>
+            <span>Среднее время ответа типовых SELECT-запросов</span>
+          </div>
+          <div class="kpi">
+            <strong>24/7</strong>
+            <span>Мониторинг и аудит критичных операций</span>
+          </div>
+          <div class="kpi">
+            <strong>RBAC</strong>
+            <span>Ролевой доступ для DBA, аналитиков и разработчиков</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Функциональные модули</h2>
+        <div class="cards-grid">
+          <article class="info-card">
+            <h3>Управление схемами</h3>
+            <p>
+              Структурированный обзор таблиц, контроль связей и единые правила изменения структуры
+              данных.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>SQL-консоль</h3>
+            <p>
+              Выполнение SELECT/INSERT/UPDATE/DELETE с понятным журналом ответа и быстрым контролем
+              результата.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Теоретическая база</h3>
+            <p>
+              Подробные материалы по моделированию, индексам, транзакциям, безопасности и
+              эксплуатации.
+            </p>
+          </article>
+          <article class="info-card">
+            <h3>Промышленный подход</h3>
+            <p>
+              Практики резервирования, наблюдаемости и контроля рисков для production-среды.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Операционные регламенты</h2>
+        <p class="section-intro">
+          Для рабочих контуров данных важно не только выполнение SQL-запросов, но и соблюдение
+          процессов управления изменениями.
+        </p>
+        <div class="article-grid">
+          <article class="article">
+            <h3>Change Management</h3>
+            <p>
+              Все DDL-изменения проходят через согласование, версионирование и план отката.
+            </p>
+          </article>
+          <article class="article">
+            <h3>Incident Response</h3>
+            <p>
+              SLA на реакцию инцидентов, журнал коммуникаций и контроль восстановления сервиса.
+            </p>
+          </article>
+          <article class="article">
+            <h3>Data Governance</h3>
+            <p>
+              Классификация данных, сроки хранения, контроль доступа и аудит действий операторов.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Визуальные сценарии работы</h2>
+        <p class="section-intro">
+          Ниже представлены типовые контексты использования: операционное управление, аудит и
+          архитектурный контроль.
+        </p>
+        <div class="media-grid">
+          <article class="media-card">
+            <img
+              src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80"
+              alt="Центр мониторинга и аналитики данных"
+            />
+            <div class="media-body">
+              <h3>Операционный мониторинг</h3>
+              <p>
+                Наблюдение за нагрузкой, состоянием запросов и системными метриками в едином
+                интерфейсе.
+              </p>
+            </div>
+          </article>
+          <article class="media-card">
+            <img
+              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80"
+              alt="Рабочее место инженера по базам данных"
+            />
+            <div class="media-body">
+              <h3>Инженерная практика</h3>
+              <p>
+                Выполнение SQL-операций, проверка схемы и анализ результатов без переключения между
+                инструментами.
+              </p>
+            </div>
+          </article>
+          <article class="media-card">
+            <img
+              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80"
+              alt="Архитектура распределенной инфраструктуры данных"
+            />
+            <div class="media-body">
+              <h3>Инфраструктурный контроль</h3>
+              <p>
+                Планирование репликации, резервного копирования и восстановления для критичных
+                контуров данных.
+              </p>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
 
-    <footer>© 2026 SQL WebHelper • Data Admin Experience</footer>
+    <footer>© 2026 SQL WebHelper • Data Operations Platform</footer>
   </body>
 </html>

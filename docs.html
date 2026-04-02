@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL WebHelper — SQL Docs</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">SQL WebHelper</div>
+      <nav>
+        <a href="index.html">Главная</a>
+        <a href="theory.html">Теория</a>
+        <a href="admin.html">DBM Studio</a>
+        <a href="about.html">Архитектура</a>
+        <a href="docs.html" class="active">SQL Docs</a>
+        <a href="release-notes.html">Релизы</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+    </header>
+
+    <main class="content-page">
+      <section class="section content">
+        <h1>Справочник SQL-команд платформы</h1>
+        <p>
+          Раздел описывает команды, доступные в DBM Studio. Синтаксис ориентирован на практическую
+          работу и покрывает DDL и DML-сценарии.
+        </p>
+
+        <h2>SELECT</h2>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Синтаксис</th>
+              <th>Пример</th>
+              <th>Комментарий</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SELECT * FROM table</td>
+              <td>SELECT * FROM users;</td>
+              <td>Выбор всех колонок</td>
+            </tr>
+            <tr>
+              <td>WHERE + ORDER BY + LIMIT</td>
+              <td>SELECT id,name FROM users WHERE id &gt;= 2 ORDER BY id DESC LIMIT 2;</td>
+              <td>Фильтрация, сортировка, ограничение</td>
+            </tr>
+            <tr>
+              <td>LIKE / IN</td>
+              <td>SELECT * FROM users WHERE name LIKE 'А%';</td>
+              <td>Поиск по шаблону и спискам значений</td>
+            </tr>
+            <tr>
+              <td>JOIN</td>
+              <td>
+                SELECT users.name, orders.total FROM users JOIN orders ON users.id = orders.user_id;
+              </td>
+              <td>Соединение таблиц по условию ON</td>
+            </tr>
+            <tr>
+              <td>Агрегация + GROUP BY + HAVING</td>
+              <td>
+                SELECT user_id, SUM(total) AS revenue FROM orders GROUP BY user_id HAVING revenue &gt; 500;
+              </td>
+              <td>Группировка и фильтрация агрегированных результатов</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>INSERT / UPDATE / DELETE</h2>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Операция</th>
+              <th>Пример</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>INSERT (одна строка)</td>
+              <td>INSERT INTO users (id,name,role) VALUES (4,'Олег','Viewer');</td>
+            </tr>
+            <tr>
+              <td>INSERT (несколько строк)</td>
+              <td>INSERT INTO products (id,name,price) VALUES (504,'GPU',45000),(505,'NAS',87000);</td>
+            </tr>
+            <tr>
+              <td>UPDATE</td>
+              <td>UPDATE users SET role='Senior DBA' WHERE id=1;</td>
+            </tr>
+            <tr>
+              <td>DELETE</td>
+              <td>DELETE FROM orders WHERE total &lt; 700;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>DDL-команды</h2>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Команда</th>
+              <th>Пример</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CREATE TABLE</td>
+              <td>CREATE TABLE audit_log (id INT, action VARCHAR(255), created_at TEXT);</td>
+            </tr>
+            <tr>
+              <td>ALTER TABLE ADD COLUMN</td>
+              <td>ALTER TABLE users ADD COLUMN email VARCHAR(255);</td>
+            </tr>
+            <tr>
+              <td>ALTER TABLE DROP COLUMN</td>
+              <td>ALTER TABLE users DROP COLUMN email;</td>
+            </tr>
+            <tr>
+              <td>TRUNCATE TABLE</td>
+              <td>TRUNCATE TABLE audit_log;</td>
+            </tr>
+            <tr>
+              <td>DROP TABLE</td>
+              <td>DROP TABLE audit_log;</td>
+            </tr>
+            <tr>
+              <td>SHOW TABLES / DESCRIBE</td>
+              <td>SHOW TABLES; DESCRIBE users;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>EXPLAIN</h2>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Команда</th>
+              <th>Пример</th>
+              <th>Назначение</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>EXPLAIN SELECT ...</td>
+              <td>EXPLAIN SELECT * FROM users WHERE id &gt; 1 ORDER BY id DESC LIMIT 2;</td>
+              <td>Построение визуального плана выполнения запроса</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          В консоли можно выполнять несколько запросов подряд, разделяя их точкой с запятой.
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 SQL WebHelper • SQL Documentation</footer>
+  </body>
+</html>

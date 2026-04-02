@@ -3,45 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SQL WebHelper — Архитектура</title>
+    <title>SQL WebHelper — Архитектура платформы</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="site.js" defer></script>
   </head>
   <body>
-    <header class="topbar glass">
+    <header class="topbar">
       <div class="brand">SQL WebHelper</div>
       <nav>
         <a href="index.html">Главная</a>
         <a href="theory.html">Теория</a>
         <a href="admin.html">DBM Studio</a>
         <a href="about.html" class="active">Архитектура</a>
+        <a href="docs.html">SQL Docs</a>
+        <a href="release-notes.html">Релизы</a>
+        <a href="contacts.html">Контакты</a>
       </nav>
     </header>
 
     <main class="content-page">
-      <section class="glass gradient-border content">
-        <h1>Архитектурная концепция</h1>
+      <section class="section content">
+        <h1>Архитектурная модель SQL WebHelper</h1>
         <p>
-          SQL WebHelper спроектирован как модульное веб-приложение, которое
-          соединяет образовательный контент и рабочую панель администратора БД.
+          Платформа построена как модульная система для управления данными, в которой интерфейс
+          пользователя, бизнес-логика и слой хранения разделены и могут масштабироваться независимо.
+          Такой подход позволяет постепенно переходить от демонстрационного контура к промышленной
+          реализации без изменения пользовательского опыта.
         </p>
 
-        <h2>Слои приложения</h2>
+        <h2>Слои системы</h2>
+        <div class="article-grid">
+          <article class="article">
+            <h3>Presentation Layer</h3>
+            <p>
+              Веб-интерфейс с единым дизайн-языком, навигацией по модулям и встроенной SQL-консолью.
+            </p>
+          </article>
+          <article class="article">
+            <h3>Application Layer</h3>
+            <p>
+              Обработка команд, валидация, маршрутизация операций и контроль бизнес-правил.
+            </p>
+          </article>
+          <article class="article">
+            <h3>Data Layer</h3>
+            <p>
+              Модель хранения таблиц и операций, которую можно подключить к реальной СУБД через API.
+            </p>
+          </article>
+        </div>
+
+        <h2>Инженерные принципы</h2>
+        <ul>
+          <li>Явная ответственность модулей и минимизация связности между слоями.</li>
+          <li>Предсказуемые сценарии изменений схемы и контроль обратной совместимости.</li>
+          <li>Журналирование операций и аудит ключевых событий доступа к данным.</li>
+          <li>Готовность к интеграции с внешним мониторингом и системой оповещений.</li>
+        </ul>
+
+        <h2>Безопасность и доступ</h2>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>Контроль</th>
+              <th>Реализация</th>
+              <th>Цель</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RBAC</td>
+              <td>Роли DBA / Analyst / Viewer</td>
+              <td>Ограничение критичных действий</td>
+            </tr>
+            <tr>
+              <td>Аудит</td>
+              <td>Логирование запросов и операций</td>
+              <td>Трассируемость изменений</td>
+            </tr>
+            <tr>
+              <td>Шифрование</td>
+              <td>TLS и шифрование данных в хранилище</td>
+              <td>Защита каналов и содержимого</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Дорожная карта до production</h2>
         <ol>
-          <li><strong>UI Layer:</strong> многостраничный интерфейс с единым дизайн-языком.</li>
-          <li><strong>Domain Layer:</strong> mini SQL-движок для CRUD-операций.</li>
-          <li><strong>Data Layer:</strong> in-memory модель таблиц как прототип реальной БД.</li>
+          <li>Подключение backend API и реальной СУБД (MySQL/PostgreSQL).</li>
+          <li>Миграции схемы через инструмент версионирования (Flyway/Liquibase).</li>
+          <li>Интеграция SSO, RBAC и централизованного аудита.</li>
+          <li>Настройка мониторинга, резервирования и аварийного восстановления.</li>
         </ol>
 
-        <h2>План расширения до production</h2>
+        <h2>Нефункциональные требования</h2>
         <ul>
-          <li>Добавление backend API (Node.js/Python/Go) с настоящим MySQL.</li>
-          <li>JWT/OAuth2 авторизация и разграничение ролей DBA/Analyst/Viewer.</li>
-          <li>Миграции схемы через Liquibase/Flyway.</li>
-          <li>Набор шаблонов административных операций и отчётов.</li>
+          <li>Доступность: целевой SLA не ниже 99.9% для критичных сервисов данных.</li>
+          <li>Масштабирование: горизонтальное расширение read-контуров через реплики.</li>
+          <li>Наблюдаемость: централизованные метрики, логи и трассировка SQL-операций.</li>
+          <li>Соответствие: регламент хранения данных и контроль действий операторов.</li>
         </ul>
+      </section>
+
+      <section class="section">
+        <h2>Архитектурные иллюстрации</h2>
+        <div class="media-grid">
+          <article class="media-card">
+            <img
+              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80"
+              alt="Команда инженеров обсуждает архитектуру платформы"
+            />
+            <div class="media-body">
+              <h3>Проектирование модулей</h3>
+              <p>
+                Формирование архитектурных решений на основе эксплуатационных требований бизнеса.
+              </p>
+            </div>
+          </article>
+          <article class="media-card">
+            <img
+              src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=1200&q=80"
+              alt="Работа с инфраструктурной документацией"
+            />
+            <div class="media-body">
+              <h3>Документирование решений</h3>
+              <p>
+                Стандартизация процессов внедрения, сопровождения и регламентов безопасности.
+              </p>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
 
-    <footer>© 2026 SQL WebHelper • Architecture</footer>
+    <footer>© 2026 SQL WebHelper • Platform Architecture</footer>
   </body>
 </html>

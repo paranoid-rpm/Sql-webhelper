@@ -1,23 +1,32 @@
 # SQL WebHelper
 
-Многостраничное современное веб-приложение для администрирования баз данных с упором на UX и обучение.
+SQL WebHelper — многостраничная веб-платформа для обучения и операционной работы с SQL в формате
+административного портала.
 
 ## Страницы
 
-- `index.html` — главная лендинг-страница.
-- `theory.html` — большой теоретический блок по администрированию БД.
-- `admin.html` — интерактивная панель **DBM Studio** (подобие mini MySQL DBM).
-- `about.html` — архитектура и план развития.
+- `index.html` — главная страница платформы и обзор модулей.
+- `theory.html` — расширенная теория по проектированию и эксплуатации БД.
+- `admin.html` — рабочая SQL-консоль DBM Studio.
+- `about.html` — архитектура и инженерные принципы платформы.
+- `docs.html` — справочник синтаксиса SQL-команд.
+- `release-notes.html` — история релизов.
+- `contacts.html` — каналы поддержки и регламенты реакции.
 
 ## Возможности DBM Studio
 
-- Просмотр демо-схемы `demo_shop` и таблиц `users`, `orders`, `products`.
-- Встроенная SQL-консоль с базовой поддержкой:
-  - `SELECT * FROM table;`
-  - `INSERT INTO table (a,b) VALUES (1,'x');`
-  - `UPDATE table SET a=2 WHERE id=1;`
-  - `DELETE FROM table WHERE id=1;`
-- Сброс демо-БД к начальному состоянию.
+- Работа с таблицами и динамический навигатор схем.
+- Поддержка SQL-команд:
+  - `SELECT ... FROM ... WHERE ... ORDER BY ... LIMIT ...`
+  - `INSERT INTO ... VALUES (...)`
+  - `UPDATE ... SET ... WHERE ...`
+  - `DELETE FROM ... WHERE ...`
+  - `CREATE TABLE`, `ALTER TABLE ADD/DROP COLUMN`
+  - `SHOW TABLES`, `DESCRIBE table`
+  - `TRUNCATE TABLE`, `DROP TABLE`
+- Выполнение мультизапросов (несколько команд через `;`).
+- Сохранение состояния БД в `localStorage`.
+- Экспорт и импорт базы в формате JSON.
 
 ## Запуск
 
